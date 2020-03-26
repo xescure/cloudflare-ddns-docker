@@ -20,3 +20,4 @@ RUN apk del git && rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["/docker-entry.sh"]
 CMD ["/docker-cmd.sh"]
+#x
