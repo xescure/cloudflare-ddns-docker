@@ -1,0 +1,28 @@
+%YAML 1.1
+# Cloudflare DDNS example configuration
+---
+
+# Your Cloudflare email address
+cf_email: 'kakas.jozsef.m@gmail.com'
+
+# Your Cloudflare API key
+# https://support.cloudflare.com/hc/en-us/articles/200167836-Where-do-I-find-my-Cloudflare-API-key
+cf_api_key: 38e220c0f5d871c900c9c9771e8b1edbffe3d
+
+# Cloudflare zone name
+# If you're updating 'ddns.example.com' set this to 'example.com'
+cf_zone: rooster.host
+
+# List of records
+# If you're updating 'example.com' record, set its name to '@'.
+# Only write the subdomain ('ddns' for 'ddns.example.com')
+cf_records:
+    - '@':
+        type: A
+        proxied: false
+        log: INFO
+
+# This is the method used to discover the server's IP address
+# The faster one is 'dig' but it may not be available on your system
+# Available methods: 'http' or 'dig'
+cf_resolving_method: 'http'
