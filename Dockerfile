@@ -6,12 +6,15 @@ RUN apk update && apk add dcron curl wget rsync ca-certificates && rm -rf /var/c
 # I've not yet read what it does, but it's from the original docker-cron repo
 RUN mkdir -p /var/log/cron && mkdir -m 0644 -p /var/spool/cron/crontabs && touch /var/log/cron/cron.log && mkdir -m 0644 -p /etc/cron.d
 
+# Move cron scripts to the image
+COPY /scripts/* /
+
 # Move the required scripts and directories to the image
 RUN mkdir /cloudflare-ddns
 COPY cloudflare-ddns.py /cloudflare-ddns
 
 RUN mkdir /cloudflare-ddns/zones
-COPY zones/* /cloudflare-ddns/zones
+COPY zones/* /cloudflare-ddns/zones/
 
 RUN mkdir /cloudflare-ddns/logs
 
