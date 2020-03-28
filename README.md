@@ -2,10 +2,16 @@
 
 ## Prerequisites
 
-1. [Add the domain you would like to update to Cloudflare](https://support.cloudflare.com/hc/en-us/articles/201720164-Creating-a-Cloudflare-account-and-adding-a-website)
-2. Create a configuration file based on [example.com.yml](https://github.com/xescure/cloudflare-ddns-docker/blob/master/zones/example.com.yml) and put it in a directory named `zones`
+1. Get your own domain, if you don't yet have one
 
-    * The script can only update existing records, so make sure you manually create them first at cloudflare.com
+    * Maybe pick one up for free at [Freenom](freenom.com)
+
+1. [Add the domain to Cloudflare](https://support.cloudflare.com/hc/en-us/articles/201720164-Creating-a-Cloudflare-account-and-adding-a-website)
+
+1. Create a configuration file based on [example.com.yml](https://github.com/xescure/cloudflare-ddns-docker/blob/master/zones/example.com.yml) and put it in a directory named `zones`
+
+    * The script can only update existing records, so make sure you manually create them first at [dash.cloudflare.com](dash.cloudflare.com)
+    * Change `proxied:` to `false` if the domain is used for practically anything other than HTTP/S traffic
 
 ## Simple Usage
 ```
@@ -50,7 +56,7 @@ Work in progress
 
 ## Sources
 
-The project is based on [xordiv/docker-alpine-cron](https://github.com/xordiv/docker-alpine-cron) and [adrienbrignon/cloudflare-ddns](https://github.com/adrienbrignon/cloudflare-ddns)
+The project is based on [xordiv/docker-alpine-cron](https://github.com/xordiv/docker-alpine-cron) and [adrienbrignon/cloudflare-ddns](https://github.com/adrienbrignon/cloudflare-ddns), huge thanks to them!
 
 ## Retained from [xordiv/docker-alpine-cron](https://github.com/xordiv/docker-alpine-cron)
 
