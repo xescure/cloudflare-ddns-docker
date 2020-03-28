@@ -1,7 +1,5 @@
 # Dockerized Cloudflare-DDNS
 
-# Currently Work in Progress
-
 ## Prerequisites
 
 1. [Add the domain you would like to update to Cloudflare](https://support.cloudflare.com/hc/en-us/articles/201720164-Creating-a-Cloudflare-account-and-adding-a-website)
@@ -16,13 +14,35 @@ docker run --name=cloudflare-ddns -d --restart=always \
 -e ZONE_NAME="example.com" \
 xescure/cloudflare-ddns:latest-amd64
 ```
-By default this will update your domain every minute to your current public IP. Simple as that.
+By default this will update the selected domain every minute to your current public IP. Simple as that.
 
-You can use a custom refresh schedule, just add `-e REFRESH_SCHEDULE="<your cron schedule expression>"` to the `docker run` command. If you are not sure about cron, consult [crontab.guru](https://crontab.guru/) ;)
+A custom update schedule can be set by adding `-e REFRESH_SCHEDULE="<your cron schedule expression>"` to the `docker run` command. *If you are not sure about cron, consult [crontab.guru](https://crontab.guru/) ;)*
 
 ## Raspberry Pi
 
 The image is fully compatible with the Raspberry Pi, just use the tag `xescure/cloudflare-ddns:latest-arm` or build it for yourself by cloning the repository and running `docker build -t cloudflare-ddns .`
+
+## Logging
+
+Logs can be found at `/logs/your.domain.log`.
+
+If persistent logging is needed, use `-v /where/you/want/your/logs:/logs`.
+
+## Docker Compose example
+```
+version: '3.3'
+services:
+    cloudflare-ddns:
+        image: xescure/cloudflare-ddns:latest-amd64
+        container_name: cloudflare-ddns
+        restart: always
+        volumes:
+            - '/docker/cloudflare-ddns/zones:/zones'
+            - '/docker/cloudflare-ddns/logs:/logs'
+        environment:
+            - ZONE_NAME=your.domain
+            - REFRESH_SCHEDULE=*/5 * * * *
+```
 
 ## Update multiple domains
 

@@ -20,7 +20,7 @@ COPY requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt && rm requirements.txt
 
 # Create symbolic links for easier mounting
-RUN ln -s /cloudflare-ddns/zones /zones
+RUN ln -s /cloudflare-ddns/zones /zones && ln -s /cloudflare-ddns/logs /logs
 
 # Move cron scripts to the image
 COPY /scripts/* /
