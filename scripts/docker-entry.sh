@@ -11,7 +11,7 @@ rm -rf /var/spool/cron/crontabs && mkdir -m 0644 -p /var/spool/cron/crontabs
 [ ! -z "$CRON_STRINGS" ] && echo -e "$CRON_STRINGS\n" > /var/spool/cron/crontabs/CRON_STRINGS
 
 # If defined, add simple cron entry to the DDNS script
-[ ! -z "$ZONE_NAME" ] && echo -e "$REFRESH_SCHEDULE python /cloudflare-ddns.py -z $ZONE_NAME\n" > /var/spool/cron/crontabs/CDDNS_ENV
+[ ! -z "$ZONE_NAME" ] && echo -e "$REFRESH_SCHEDULE $RUN_SCRIPT -z $ZONE_NAME\n" > /var/spool/cron/crontabs/CLOUDFLARE_DDNS
 
 
 chmod -R 0644 /var/spool/cron/crontabs

@@ -15,20 +15,22 @@ COPY zones/* /cloudflare-ddns/zones/
 
 RUN mkdir /cloudflare-ddns/logs
 
-# Create symbolic links for easier mounting
-RUN ln -s /cloudflare-ddns/zones /zones && ln -s /cloudflare-ddns/cloudflare-ddns.py /cloudflare-ddns.py
-
 # Install requirements for ddns script and clean up
 COPY requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt && rm requirements.txt
+
+# Create symbolic links for easier mounting
+RUN ln -s /cloudflare-ddns/zones /zones
 
 # Move cron scripts to the image
 COPY /scripts/* /
 
 
-
 # Default refresh schedule
 ENV REFRESH_SCHEDULE="* * * * *"
+
+# Script executable
+ENV RUN_SCRIPT="python /cloudflare-ddns/cloudflare-ddns.py"
 
 # Cron's entry and cmd (proper logging should be implemented here for the ddns, i think)
 ENTRYPOINT ["/docker-entry.sh"]
